@@ -8,8 +8,8 @@ you can see how it runs at:
   
 
 
-a free service, written in Python Flask + Tornado + a simple google appegine app
-to notify if your website is offline.
+A free service, written in Python Flask && A Simple Google Appegine App to notify if your website is offline.
+
 
 How to install it:
 
