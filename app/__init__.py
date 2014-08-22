@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
-app.secret_key = "askdlasjdklklassd"
+app.secret_key = "askdlasjdklklassdxxxxxxx"
 #cache = Cache(app,config={'CACHE_TYPE': 'simple'})
 
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
