@@ -25,7 +25,7 @@ pip install pdfminer
    
 3. Install supervisor and let it run indefinetly
 
-4. Setup a google appegine app that you use just to send emails.
+4. Setup a google appegine app that you use just to send emails. You can use my example from here https://github.com/AndreiD/IsOnlineZilla or write your own. 
 
 5. Create a cronjob every 5 (? less, more ?) minutes that runs ping_deamon.py [TODO: recode it]
 
