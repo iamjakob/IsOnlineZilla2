@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<form class="form-horizontal" method="post" action="/login">
+    <fieldset>
+
+        <!-- Form Name -->
+        <h4>Manage My Websites</h4>
+
+
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="number">Your email</label>
+
+            <div class="col-lg-4">
+                {{form.user_email (class="form-control")}}
+
+                {% for error in form.errors.user_email %} <br/>
+
+                <div class="alert alert-danger" style="display: inline-block">
+                    {{error}}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="controls">
+                <button id="vksunit_send" type="submit" name="ascunit_send" class="btn btn-success"><span
+                        class="glyphicon glyphicon-user"></span> Login
+                </button>
+
+            </div>
+        </div>
+
+
+
+        <!-- Button -->
+
+
+
+
+
+    </fieldset>
+</form>
+
+
+
+
+
+{% endblock content %}

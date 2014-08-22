@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <form class="form-horizontal" method="post" action="/register">
+        <fieldset>
+
+            <!-- Form Name -->
+            <h4>Add new website</h4>
+
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="number">Your email</label>
+
+                <div class="col-lg-4">
+                    {{registerform.user_email (class="form-control")}}
+
+                    {% for error in registerform.errors.user_email %} <br/>
+
+                        <div class="alert alert-danger" style="display: inline-block">
+                            {{error}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="year">Website http://</label>
+
+                <div class="col-lg-4">
+                    {{registerform.website (class="form-control")}}
+
+                    {% for error in registerform.errors.website %} <br/>
+
+                        <div class="alert alert-danger" style="display: inline-block">
+                            {{error}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+            <!-- Button -->
+            <div class="form-group">
+
+                <div class="controls">
+                    <button id="vksunit_send" type="submit" name="ascunit_send" class="btn btn-success"><span
+                            class="glyphicon glyphicon-plus"></span> Start monitoring my website
+                    </button>
+
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h3>{{user.user_email}}</h3>
+
+<hr>
+
+{% if records|length < 1 %}
+<h1>You have no websites!</h1>
+{% else %}
+
+{% for record in records %}
+<br>
+<h4><a target="_blank" href="http://{{record.website}}">{{record.website}}</a> - You have {{record.notifications_limit}} more notifications - {% if record.is_offline == 1 %}
+    <span style="color: red"> OFFLINE since {{record.found_offline_date.strftime('%d %B %H:%M')}}</span>
+    {% elif record.is_offline == 2 %}
+    Just added...
+    {% else %}
+    <span style="color: limegreen"> ONLINE </span>
+    {% endif %}</h4>
+
+
+{% if record.enable_notifications == 1 %}
+<span style="color: limegreen"> Notifications ENABLED </span>
+
+{% else %}
+<span style="color: orangered"> Notifications DISABLED </span>
+
+{% endif %}
+<br>
+
+{% if record.enable_notifications == 1 %}
+
+<a class="btn btn-warning" href="/notifications/disable/{{record.id}}">disable notifications</a>
+{% else %}
+<a class="btn btn-success" href="/notifications/enable/{{record.id}}">enable notifications</a>
+{% endif %}
+
+<a class="btn btn-danger" href="/delete/{{record.id}}">delete website</a>
+
+<br>
+
+{% endfor %}
+{% endif %}
+
+{% endblock content %}
