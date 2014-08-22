@@ -2,7 +2,7 @@ IsOnlineZilla
 ==============
 
 you can see how it runs at:
-  http://androidadvance.com:1337/
+  http://androidadvance.com:1337
   
   ![screenshot](https://raw.githubusercontent.com/AndreiD/IsOnlineZilla2/master/app/static/img/isonlinezilla.jpg)
   
