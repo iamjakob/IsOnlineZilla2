@@ -218,10 +218,8 @@ class TheModelUnitsAdminView(ModelView):
     # Override displayed fields
     # column_list = ('id','user_email', 'category', 'notification_text', 'sent_email', 'created_date')
     def is_accessible(self):
-        if request.remote_addr == '93.152.155.105':
-            return True
-        else:
-            return False
+        # write your protection here!!!
+        return True
 
 
     def __init__(self, session, **kwargs):
@@ -235,10 +233,8 @@ class UsersAdminView(ModelView):
     column_list = ('id', 'user_email', 'user_ip', 'created_date')
 
     def is_accessible(self):
-        if request.remote_addr == '93.152.155.105':
-            return True
-        else:
-            return False
+        # write your protection here!!!
+        return True
 
     def __init__(self, session, **kwargs):
         super(UsersAdminView, self).__init__(Users, session, **kwargs)
