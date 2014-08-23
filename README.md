@@ -8,8 +8,8 @@ you can see how it runs at:
   
 
 
-a free service, written in Python Flask + Tornado + a simple google appegine app
-to notify if your website is offline.
+A free service, written in Python Flask && A Simple Google Appegine App to notify if your website is offline.
+
 
 How to install it:
 
@@ -25,7 +25,7 @@ pip install pdfminer
    
 3. Install supervisor and let it run indefinetly
 
-4. Setup a google appegine app that you use just to send emails.
+4. Setup a google appegine app that you use just to send emails. You can use my example from here https://github.com/AndreiD/IsOnlineZilla or write your own. 
 
 5. Create a cronjob every 5 (? less, more ?) minutes that runs ping_deamon.py [TODO: recode it]
 
