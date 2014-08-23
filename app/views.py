@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, flash, g
-
 from jinja2 import evalcontextfilter, Markup, escape
 from flask.ext.login import login_user, logout_user, login_required, current_user
+from flask.ext.admin import Admin, BaseView, expose
+from flask.ext.admin.contrib.sqla import ModelView
 
 from forms import *
 from utils import *
@@ -41,7 +42,10 @@ def before_request():
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+
+    user = g.user
     return render_template("index.html",
+                           user=user,
                            title=u'IsOnlineZilla',
     )
 
@@ -104,6 +108,7 @@ def delete(tId=0):
 def login():
     form = LoginForm(request.form)
 
+
     if request.method == 'POST':
 
         if form.validate():
@@ -120,12 +125,18 @@ def login():
 
     return render_template("login.html",
                            form=form,
+                           user=None,
                            title='Login'
     )
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
+    if g.user:
+        user = g.user
+    else:
+        user = None
 
     registerform = RegisterForm(request.form)
 
@@ -152,6 +163,7 @@ def register():
             return redirect(url_for("register"))
 
     return render_template("register.html",
+                           user=user,
                            registerform=registerform,
                            title='Register'
     )
@@ -188,3 +200,51 @@ def favicon():
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect(url_for("login"))
+
+
+# -------------------------- ADMIN PART ------------------------------------
+admin = Admin(app, name="IsOnlineZilla Admin")
+
+
+class MyView(BaseView):
+    @expose('/')
+    def index(self):
+        return self.render('admin/index.html')
+
+
+class TheModelUnitsAdminView(ModelView):
+    # Disable model creation
+    can_create = True
+    # Override displayed fields
+    # column_list = ('id','user_email', 'category', 'notification_text', 'sent_email', 'created_date')
+    def is_accessible(self):
+        if request.remote_addr == '93.152.155.105':
+            return True
+        else:
+            return False
+
+
+    def __init__(self, session, **kwargs):
+        super(TheModelUnitsAdminView, self).__init__(TheModel, session, **kwargs)
+
+
+class UsersAdminView(ModelView):
+    # Disable model creation
+    can_create = True
+    # Override displayed fields
+    column_list = ('id', 'user_email', 'user_ip', 'created_date')
+
+    def is_accessible(self):
+        if request.remote_addr == '93.152.155.105':
+            return True
+        else:
+            return False
+
+    def __init__(self, session, **kwargs):
+        super(UsersAdminView, self).__init__(Users, session, **kwargs)
+
+
+admin.add_view(UsersAdminView(db.session))
+admin.add_view(TheModelUnitsAdminView(db.session))
+
+# -------------------------- ADMIN PART END ---------------------------------

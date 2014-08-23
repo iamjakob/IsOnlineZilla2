@@ -7,13 +7,13 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">IsOnlineZilla</a>
+    <a class="navbar-brand" href="/">IsOnlineZilla</a>
       <ul class="nav navbar-nav navbar-right">
 
 
           <li><a href="/register">Register</a></li>
-          <li><a href="/manage">Manage</a></li>
-          {% if user %}<li><a href="/logout">Logout</a></li>
+          {% if user.user_email|length > 5 %}<li><a href="/manage">Manage</a></li>{% endif %}
+          {% if user.user_email|length > 5 %}<li><a href="/logout">Logout [{{user.user_email}}]</a></li>
           {% else %}
           <li><a href="/login">Login</a></li>
           {% endif %}

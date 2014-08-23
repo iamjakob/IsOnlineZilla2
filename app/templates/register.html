@@ -15,7 +15,7 @@
                 <label class="control-label col-xs-2" for="number">Your email</label>
 
                 <div class="col-lg-4">
-                    {{registerform.user_email (class="form-control")}}
+                    {{registerform.user_email (class="form-control",value=user.user_email)}}
 
                     {% for error in registerform.errors.user_email %} <br/>
 
